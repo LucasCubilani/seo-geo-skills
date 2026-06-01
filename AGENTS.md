@@ -8,7 +8,7 @@ Guidelines for AI agents working in this repository. For full runtime context, s
 - **Repository**: https://github.com/aaron-he-zhu/seo-geo-claude-skills
 - **Author**: Aaron He Zhu | **License**: Apache 2.0
 - **Specs**: [Agent Skills](https://agentskills.io/specification.md)
-Content-first repository: skills and commands are Markdown; Claude Code hooks use a small Bash runner. Primary directories: `research/`, `build/`, `optimize/`, `monitor/`, `cross-cutting/`, `commands/`, `references/`.
+Content-first repository: skills and commands are Markdown; Claude Code hooks use a small Bash runner; `scripts/connectors/` holds zero-dependency Python-stdlib data helpers (no pip deps). Primary directories: `research/`, `build/`, `optimize/`, `monitor/`, `cross-cutting/`, `commands/`, `references/`, `scripts/connectors/`.
 
 Install instructions live in [README.md](README.md). Keep this file focused on authoring and maintenance rules.
 

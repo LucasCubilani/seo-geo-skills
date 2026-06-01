@@ -4,6 +4,27 @@
 
 All endpoints below were verified against primary vendor/source docs (2026-05). If a call 404s, re-check the linked doc — vendors move endpoints.
 
+## Bundled helpers — run the data fetch locally (zero-dependency)
+
+For the bundle-able categories the repo ships small **Python-3-stdlib** helpers under [`scripts/connectors/`](scripts/connectors/README.md) — no `pip`, no key (except where noted). They turn the recipes below into one command, so a skill can pull real data itself instead of asking you to paste it. Run from the repo root:
+
+| Capability | Helper | Needs |
+|---|---|---|
+| Crawl a site (→ page records) | `crawl.py <url>` | — |
+| On-page audit (title/meta/headings/canonical/JSON-LD) | `onpage.py <url>` | — |
+| robots.txt eval + AI-bot check | `robots.py <url> --check-ai-bots` | — |
+| sitemap / sitemap-index / llms.txt | `sitemap.py <url>` | — |
+| Internal-link graph (orphans / depth / internal PageRank) | `crawl.py … \| linkgraph.py -` | — |
+| Page speed + Core Web Vitals | `psi.py <url>` | free key for automation |
+| Structured-data extract + validate (+ FAQ/HowTo deprecation) | `schema_lint.py <url>` | — |
+| Entity → Wikidata QID + claims | `kg.py reconcile "<name>"` | — |
+| Archive history / change tracking | `wayback.py <url>` | — |
+| Domain-authority signal | `openpagerank.py <domain> --key …` | free key |
+| Keyword ideas (⚠️ unofficial endpoint) | `suggest.py "<seed>" --expand` | — |
+| Brand / mention RSS | `rss_monitor.py <feed-url>` | — |
+
+See [scripts/connectors/README.md](scripts/connectors/README.md) for the full list, the safety contract, and what intentionally stays external (proprietary / own-data → MCP/API).
+
 ## Free & public data sources (no paid tool, no MCP)
 
 The fastest way to keep a skill zero-dependency is to feed it data from a free, first-party, or keyless public endpoint, then paste the response when the skill asks for the matching `~~category` data.
