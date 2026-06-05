@@ -2,36 +2,36 @@
 
 Current versions for the plugin and all 20 skills. Agents can fetch this file from `https://raw.githubusercontent.com/aaron-he-zhu/seo-geo-claude-skills/main/VERSIONS.md` once per session.
 
-**Current release**: `9.9.9` (2026-05-14). Skill `version`, `metadata.version`, plugin manifests, marketplace files, and badges are aligned to the same public version.
+**Current release**: `9.9.10` (2026-06-05). Skill `version`, `metadata.version`, plugin manifests, marketplace files, and badges are aligned to the same public version.
 
 ## Skills
 
 | Skill | Category | Version | Last Updated |
 |-------|----------|---------|--------------|
-| keyword-research | research | 9.9.9 | 2026-05-14 |
-| competitor-analysis | research | 9.9.9 | 2026-05-14 |
-| serp-analysis | research | 9.9.9 | 2026-05-14 |
-| content-gap-analysis | research | 9.9.9 | 2026-05-14 |
-| seo-content-writer | build | 9.9.9 | 2026-05-14 |
-| geo-content-optimizer | build | 9.9.9 | 2026-05-14 |
-| meta-tags-optimizer | build | 9.9.9 | 2026-05-14 |
-| schema-markup-generator | build | 9.9.9 | 2026-05-14 |
-| on-page-seo-auditor | optimize | 9.9.9 | 2026-05-14 |
-| technical-seo-checker | optimize | 9.9.9 | 2026-05-14 |
-| internal-linking-optimizer | optimize | 9.9.9 | 2026-05-14 |
-| content-refresher | optimize | 9.9.9 | 2026-05-14 |
-| rank-tracker | monitor | 9.9.9 | 2026-05-14 |
-| backlink-analyzer | monitor | 9.9.9 | 2026-05-14 |
-| performance-reporter | monitor | 9.9.9 | 2026-05-14 |
-| alert-manager | monitor | 9.9.9 | 2026-05-14 |
-| content-quality-auditor | cross-cutting | 9.9.9 | 2026-05-14 |
-| domain-authority-auditor | cross-cutting | 9.9.9 | 2026-05-14 |
-| entity-optimizer | cross-cutting | 9.9.9 | 2026-05-14 |
-| memory-management | cross-cutting | 9.9.9 | 2026-05-14 |
+| keyword-research | research | 9.9.10 | 2026-06-05 |
+| competitor-analysis | research | 9.9.10 | 2026-06-05 |
+| serp-analysis | research | 9.9.10 | 2026-06-05 |
+| content-gap-analysis | research | 9.9.10 | 2026-06-05 |
+| seo-content-writer | build | 9.9.10 | 2026-06-05 |
+| geo-content-optimizer | build | 9.9.10 | 2026-06-05 |
+| meta-tags-optimizer | build | 9.9.10 | 2026-06-05 |
+| schema-markup-generator | build | 9.9.10 | 2026-06-05 |
+| on-page-seo-auditor | optimize | 9.9.10 | 2026-06-05 |
+| technical-seo-checker | optimize | 9.9.10 | 2026-06-05 |
+| internal-linking-optimizer | optimize | 9.9.10 | 2026-06-05 |
+| content-refresher | optimize | 9.9.10 | 2026-06-05 |
+| rank-tracker | monitor | 9.9.10 | 2026-06-05 |
+| backlink-analyzer | monitor | 9.9.10 | 2026-06-05 |
+| performance-reporter | monitor | 9.9.10 | 2026-06-05 |
+| alert-manager | monitor | 9.9.10 | 2026-06-05 |
+| content-quality-auditor | cross-cutting | 9.9.10 | 2026-06-05 |
+| domain-authority-auditor | cross-cutting | 9.9.10 | 2026-06-05 |
+| entity-optimizer | cross-cutting | 9.9.10 | 2026-06-05 |
+| memory-management | cross-cutting | 9.9.10 | 2026-06-05 |
 
 ## Changelog
 
-### Unreleased — maintenance cleanup, focus on skills (2026-05-31)
+### v9.9.10 — focus on skills: scaffolding cleanup, 5 commands, quality pass, bundled connectors (2026-06-05)
 
 Removed non-user-facing maintenance and process scaffolding, and consolidated the command surface, so the library focuses on the skills themselves. **Breaking**: the command set is reduced to **5** (`/aaron:auto`, `/aaron:research`, `/aaron:create`, `/aaron:audit`, `/aaron:track`) — the bundle is now **20 skills + 5 commands**.
 
@@ -44,6 +44,10 @@ Removed non-user-facing maintenance and process scaffolding, and consolidated th
 - `CITATION.cff` (citation-metadata ceremony) and `references/skill-resolver.md` (a derived routing index redundant with the skills' own descriptions) — neither referenced by any skill or command.
 
 **Command re-architecture (20 → 5)**: the 17 user commands plus `/aaron:max` collapsed into 5 intent commands — `discover`/`compete`/`map` → `/aaron:research`; `brief`/`write`/`series`/`refresh`/`publish` → `/aaron:create`; `tech`/`visibility`/`authority` → `/aaron:audit`; `watch`/`report`/`remember` → `/aaron:track`; `max` → `/aaron:auto --deep` (mode flags preserved, e.g. `--meta`, `--schema`, `--alert`, `--report`). Old `/seo:*` and prior command names still recover via `/aaron:auto`.
+
+**Authoring-quality pass**: a senior-review pass across all 20 skills — narrower `description` triggers, explicit scope boundaries ("not for X — use Y"), verifiable `Done when` criteria, Decision Gates (stop-vs-continue), and a uniform Measured / User-provided / Estimated data-honesty rule so no skill presents an estimate as a fact.
+
+**Bundled zero-dependency connectors**: `scripts/connectors/` adds Python-stdlib-only helpers (no pip) that pull public or own data locally — crawl, on-page, robots/sitemap, link-graph PageRank, PageSpeed/CrUX, schema lint, Wikidata/Knowledge-Graph reconcile, Wayback, Open PageRank, Google Suggest, RSS. Six skills point to a matching helper in their Data Sources; all still run tool-free at Tier 1. Fetched content is treated as data, never instructions.
 
 **Kept**: all 20 skills, the CORE-EEAT and CITE frameworks, the `evals/` quality cases, `scripts/validate-skill.sh`, and HOT/WARM/COLD project memory.
 
