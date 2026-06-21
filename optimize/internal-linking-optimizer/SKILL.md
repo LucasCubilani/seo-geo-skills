@@ -129,3 +129,46 @@ Ask to save results; if yes, write a dated summary to `memory/audits/internal-li
 ## Next Best Skill
 
 Primary: [on-page-seo-auditor](https://github.com/aaron-he-zhu/seo-geo-claude-skills/blob/main/optimize/on-page-seo-auditor/SKILL.md) — verify that revised internal links support page-level goals.
+
+---
+
+## Workflow Connector
+
+### Session Start — Brief Validation
+This skill runs inside the Cubilani client folder. `CLAUDE.md` auto-loads at session start with FILE ROUTING: the client brain is `client-profile.md` (Sections 1–3 — Foundation, ICP, Persona); per-project work lives in the active project's `brief.md` (Section 0 strategy: goal/CTA/page ecosystem, plus Sections 4–7), in the folder named by `ACTIVE_PROJECT`. All `pages/`, `audits/`, and `monitor/` outputs save inside that active project folder. Read the brain freely; write only to the active project; never write to `client-profile.md`. Load both files before starting, then check and report:
+
+**Required:**
+- [ ] Section 1 — Foundation (site URL)
+- [ ] pages/ — the project's page set (or a site URL / page list to map links across)
+
+Report format:
+```
+✓ Client brief loaded — [Business Name]
+✓ Required sections present
+Ready to map internal linking for [Business Name].
+```
+
+If no pages or site are available:
+```
+✗ No pages or site to analyze
+→ Build pages first, or provide a site URL / page list.
+```
+
+If no `client-profile.md` found → standalone mode, ask for inputs normally.
+
+### Session End — Save & Handoff
+After the user confirms, save the linking plan to:
+`audits/internal-linking-audit.md`
+
+
+**Source tagging:** Every data point saved must be tagged per the Source Citation Standard in `client-profile.md`:
+`[DFS]` DataForSEO | `[SERP]` Live SERP | `[TRENDS]` Google Trends | `[REDDIT]` Reddit | `[G2]` G2/Capterra | `[WEB]` Web scrape | `[CLIENT]` Client-provided | `[INFERRED]` Extrapolated | `[GENERATED]` No source
+
+Then output:
+```
+✅ Internal linking plan saved to audits/internal-linking-audit.md
+
+Next session: /on-page-seo-auditor
+1. Open a new chat pointed at: Documents/Clients/[client-name]/
+2. First message: "Audit on-page SEO for [page name]"
+```

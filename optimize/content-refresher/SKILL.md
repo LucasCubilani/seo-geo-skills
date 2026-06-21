@@ -125,3 +125,47 @@ Ask to save results; if yes, write a dated summary to `memory/audits/content-ref
 ## Next Best Skill
 
 Primary: [content-quality-auditor](https://github.com/aaron-he-zhu/seo-geo-claude-skills/blob/main/cross-cutting/content-quality-auditor/SKILL.md) — re-score refreshed content before shipping.
+
+---
+
+## Workflow Connector
+
+### Session Start — Brief Validation
+This skill runs inside the Cubilani client folder. `CLAUDE.md` auto-loads at session start with FILE ROUTING: the client brain is `client-profile.md` (Sections 1–3 — Foundation, ICP, Persona); per-project work lives in the active project's `brief.md` (Section 0 strategy: goal/CTA/page ecosystem, plus Sections 4–7), in the folder named by `ACTIVE_PROJECT`. All `pages/`, `audits/`, and `monitor/` outputs save inside that active project folder. Read the brain freely; write only to the active project; never write to `client-profile.md`. Load both files before starting, then check and report:
+
+**Required:**
+- [ ] Section 1 — Foundation
+- [ ] Section 4 — Keywords (from `/keyword-research`)
+- [ ] pages/[page-slug].md — the existing page being refreshed
+
+Report format:
+```
+✓ Client brief loaded — [Business Name]
+✓ Required sections present
+Ready to refresh content for [page name].
+```
+
+If page content is missing:
+```
+✗ Page content not found
+→ Provide the page to refresh, or complete the build phase for it first.
+```
+
+If no `client-profile.md` found → standalone mode, ask for inputs normally.
+
+### Session End — Save & Handoff
+After the user confirms, save the refresh plan to:
+`audits/[page-slug]-refresh.md`
+
+
+**Source tagging:** Every data point saved must be tagged per the Source Citation Standard in `client-profile.md`:
+`[DFS]` DataForSEO | `[SERP]` Live SERP | `[TRENDS]` Google Trends | `[REDDIT]` Reddit | `[G2]` G2/Capterra | `[WEB]` Web scrape | `[CLIENT]` Client-provided | `[INFERRED]` Extrapolated | `[GENERATED]` No source
+
+Then output:
+```
+✅ Content refresh plan saved to audits/[page-slug]-refresh.md
+
+Next session: /content-quality-auditor
+1. Open a new chat pointed at: Documents/Clients/[client-name]/
+2. First message: "Audit content quality for [page name]"
+```
